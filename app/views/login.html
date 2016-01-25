@@ -1,0 +1,40 @@
+  <form ng-submit="submitLoginForm()" id="log-in-form" class="form-login col-md-6 col-md-offset-3" name="login">
+      <h2 class="form-signin-heading">Login</h2>
+      <div class="row">
+
+        <!-- Username -->
+
+        <div class="control-group form-group col-md-12"
+          ng-class="{'has-error':login.username.$invalid &&
+                                login.username.$dirty}">
+          <label>Username</label>
+          <input type="text" class="form-control" name="username" ng-model="loginForm.username" ng-maxlength="50" required>
+          <span class="help-block has-error" ng-if="signup.title.$dirty">
+            <span ng-show="login.username.$error.required">Username is required.</span>
+          </span>
+        </div>
+
+        <!-- P A S S W O R D -->
+
+        <div class="control-group form-group col-md-12"
+        ng-class="{'has-error':login.password.$invalid &&
+                              login.password.$dirty}">
+          <label>Choose a password</label>
+          <!-- Added the compareTo directive that compares the passowrds -->
+          <input type="password" class="form-control" name="password" ng-model="loginForm.password" id="password" required ng-minlength="6">
+          <span class="help-block has-error" ng-if="signup.password.$dirty">
+            <span ng-show="login.password.$error.required">Password is required.</span>
+          </span>
+        </div>
+      </div>
+
+      <br/>
+
+      <!-- Disable signup button until the form has no errors -->
+      <button class="btn btn-primary btn-lg btn-block" type="submit" ng-disabled="login.$invalid">
+        <span ng-show="!loginForm.loading">Login</span>
+        <span class="overlord-loading-spinner fa fa-spinner" ng-show="loginForm.loading" ></span>
+        <span ng-show="loginForm.loading">Preparing your new account...</span>
+      </button>
+
+  </form>
