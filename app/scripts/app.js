@@ -17,9 +17,11 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'ngCart',
+    'ngSails'
   ])
-  .config(function ($routeProvider) {
+  .config(function ($routeProvider, $httpProvider, $sailsProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
@@ -31,7 +33,32 @@ angular
         controller: 'AboutCtrl',
         controllerAs: 'about'
       })
+      .when('/login', {
+        templateUrl: 'views/login.html',
+        controller: 'LoginCtrl',
+        controllerAs: 'login'
+      })
+      .when('/register', {
+        templateUrl: 'views/register.html',
+        controller: 'RegisterCtrl',
+        controllerAs: 'register'
+      })
+      .when('/cart', {
+        templateUrl: 'views/cart.html',
+        controller: 'CartCtrl',
+        controllerAs: 'cart'
+      })
       .otherwise({
         redirectTo: '/'
       });
+
+      // $httpProvider.defaults.useXDomain = true;
+      // delete $httpProvider.defaults.headers.common['X-Requested-With'];
+
+      // $httpProvider.defaults.headers.common['Access-Control-Allow-Headers'] = '*';
+      // $httpProvider.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+      // $httpProvider.defaults.headers.common['Access-Control-Allow-Methods'] = 'GET,POST,PUT,HEAD,DELETE,OPTIONS';
+
+      $sailsProvider.url = 'http://localhost:1337';
+
   });

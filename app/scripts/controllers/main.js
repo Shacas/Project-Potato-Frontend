@@ -8,10 +8,7 @@
  * Controller of the potatoApp
  */
 angular.module('potatoApp')
-  .controller('MainCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('MainCtrl', function ($scope, $http, ngCart) {
+    ngCart.setTaxRate(13.0);
+    ngCart.setShipping(5.99);
   });
