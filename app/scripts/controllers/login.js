@@ -8,7 +8,7 @@
  * Controller of the potatoApp
  */
 angular.module('potatoApp')
-  .controller('LoginCtrl', function ($http, $scope, $sails) {
+  .controller('LoginCtrl', function ($http, $scope, $sails, $window) {
 
   // set-up loading state
   $scope.loginForm = {
@@ -17,6 +17,7 @@ angular.module('potatoApp')
 
  $scope.submitLoginForm = function (){
 
+    var userInfo;
     // Set the loading state (i.e. show loading spinner)
     $scope.loginForm.loading = true;
 
@@ -31,6 +32,11 @@ angular.module('potatoApp')
         })
         .success(function (data, status, headers, jwr) {
           $scope.loginForm.loading = true;
+          userInfo = {
+            accessToken: data.token,
+            email: data.user.email
+          };
+          $window.sessionStorage["userInfo"] = JSON.stringify(userInfo);
           window.location = '/';
       })
         .error(function (data, status, headers, jwr) {

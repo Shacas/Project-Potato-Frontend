@@ -48,6 +48,21 @@ angular
         controller: 'CartCtrl',
         controllerAs: 'cart'
       })
+      .when('/dashboard',{
+        templateUrl: "views/home.html",
+        controller: "DashboardController",
+        resolve: {
+          auth: ["$q", "$window", function($q, $window) {
+            var userInfo = $window.sessionStorage["userInfo"];
+
+            if (userInfo) {
+              return $q.when(userInfo);
+            } else {
+              return $q.reject({ authenticated: false });
+            }
+          }]
+        }
+      })
       .otherwise({
         redirectTo: '/'
       });

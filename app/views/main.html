@@ -1,21 +1,22 @@
-<div class="jumbotron">
-  <h1>Say Hi to Potato!</h1>
-  <p class="lead">
-    we are selling not only potato, but also other foods
-  </p>
-</div>
+<div class="container-fluid productlist">
   <div class="row">
-  <div ng-repeat="product in getItems()">
+    <div ng-repeat="product in getItems()">
     <div class="clearfix" ng-if="$index % 3 == 0"></div>
-    <div class="col-xs-8 col-sm-4">
-        <h4>{{product.name}}</h4>
-        <p>{{product.desc}}</p>
-        <p> Price: ${{product.price}}</p>
-        <ngcart-addtocart id="{{product.id}}" name="{{product.name}}" price="{{product.price}}" quantity="1" quantity-max="10">Add to Cart</ngcart-addtocart>
+    <div class="col-sm-4">
+      <a href="product1.html">
+        <img src="http://demo.angelostudio.net/stellashop/img/vase_2a.jpg" class="img-responsive" alt="item">
+        <span class="productlist-price-container">
+          <span class="product-price">
+            <h4>{{product.name}}</h4>
+            <span class="price">Price: ${{product.price}}</span>
+          </span>
+        </span>
+      </a>
+      <ngcart-addtocart id="{{product.id}}" name="{{product.name}}" price="{{product.price}}" quantity="1" quantity-max="10">Add to Cart</ngcart-addtocart>
+    </div>
     </div>
   </div>
 </div>
-
 
 <script type="text/ng-template" id="template/ngCart/addtocart.html">
   <div ng-hide="attrs.id">
@@ -23,14 +24,16 @@
   </div>
 
   <div ng-show="attrs.id">
-    <div>
-        <span ng-show="quantityMax">
-            <select name="quantity" id="quantity" ng-model="q"
-                    ng-options=" v for v in qtyOpt"></select>
-        </span>
-        <a class="btn btn-sm btn-primary"
-           ng-click="ngCart.addItem(id, name, price, q, data)"
-           ng-transclude></a>
+    <div style="padding-top: 10px; align-center">
+
+      <a class="btn btn-sm btn-default"
+         ng-click="ngCart.addItem(id, name, price, 1, data)"
+         ng-transclude></a>
+
+      <!--<span ng-show="quantityMax">
+        <select name="quantity" id="quantity" ng-model="q" ng-options=" v for v in qtyOpt"></select>
+      </span>-->
+
     </div>
   </div>
 </script>

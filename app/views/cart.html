@@ -1,13 +1,22 @@
-<div class="row">
-  <h3>Cart</h3>
-
-  <ngcart-cart></ngcart-cart>
-
-  <hr/>
-  <div class="col-xs-4 pull-right">
-    <ngcart-checkout service="http" settings="httpSettings">Checkout </ngcart-checkout>
+<div class="container-fluid title">
+  <div class="row">
+    <div class="col-sm-12">
+      <h2>Shopping Cart</h2>
+    </div>
   </div>
+</div>
 
+<div class="container-fluid cart-list" ng-controller="CartCtrl">
+  <div class="row">
+
+    <ngcart-cart></ngcart-cart>
+
+    <hr/>
+    <div class="col-xs-4 pull-right">
+      <ngcart-checkout service="http" settings="httpSettings">Checkout </ngcart-checkout>
+    </div>
+
+  </div>
 </div>
 
 
@@ -22,42 +31,21 @@
     Your cart is empty
 </div>
 
-<div class="table-responsive col-lg-12" ng-show="ngCart.getTotalItems() > 0">
 
+<div class="table" ng-show="ngCart.getTotalItems() > 0">
+
+  <div class="col-sm-8">
     <table class="table table-striped ngCart cart">
 
         <thead>
         <tr>
             <th></th>
-            <th></th>
+            <th>Item</th>
             <th>Quantity</th>
-            <th>Amount</th>
+            <th>Unit Price</th>
             <th>Total</th>
         </tr>
         </thead>
-        <tfoot>
-        <tr ng-show="ngCart.getTax()">
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>Tax ({{ ngCart.getTaxRate() }}%):</td>
-            <td>{{ ngCart.getTax() | currency }}</td>
-        </tr>
-        <tr ng-show="ngCart.getShipping()">
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>Shipping:</td>
-            <td>{{ ngCart.getShipping() | currency }}</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>Total:</td>
-            <td>{{ ngCart.totalCost() | currency }}</td>
-        </tr>
-        </tfoot>
         <tbody>
         <tr ng-repeat="item in ngCart.getCart().items track by $index">
             <td><span ng-click="ngCart.removeItemById(item.getId())" class="glyphicon glyphicon-remove"></span></td>
@@ -72,6 +60,35 @@
         </tr>
         </tbody>
     </table>
+  </div>
+
+  <div class="col-sm-4">
+
+    <table class="table">
+      <thead>
+      <tr>
+        <th colspan="3" class="text-center">Order sumary</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-show="ngCart.getShipping()">
+        <td>Shipping cost:</td>
+        <td></td>
+        <td class="text-right">{{ ngCart.getShipping() | currency }}</td>
+      </tr>
+      <tr ng-show="ngCart.getTax()">
+        <td>Tax ({{ ngCart.getTaxRate() }}%):</td>
+        <td></td>
+        <td class="text-right">{{ ngCart.getTax() | currency }}</td>
+      </tr>
+      <tr>
+        <td>Total:</td>
+        <td></td>
+        <td id="total" class="text-right">{{ ngCart.totalCost() | currency }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 
 </script>
@@ -85,4 +102,3 @@
 </div>
 
 </script>
-
