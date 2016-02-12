@@ -8,7 +8,7 @@
  * Controller of the potatoApp
  */
 angular.module('potatoApp')
-  .controller('LoginCtrl', function ($http, $scope, $sails, $window) {
+  .controller('LoginCtrl', function ($http, $scope, $sails, $sessionStorage, $location) {
 
   // set-up loading state
   $scope.loginForm = {
@@ -32,12 +32,10 @@ angular.module('potatoApp')
         })
         .success(function (data, status, headers, jwr) {
           $scope.loginForm.loading = true;
-          userInfo = {
-            accessToken: data.token,
-            email: data.user.email
-          };
-          $window.sessionStorage["userInfo"] = JSON.stringify(userInfo);
-          window.location = '/';
+
+          $sessionStorage.user = data;
+          // Session.create(data.token, data.user.email);
+          $location.path( "/" );
       })
         .error(function (data, status, headers, jwr) {
           $scope.loginForm.loading = true;

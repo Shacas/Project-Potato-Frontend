@@ -8,7 +8,7 @@
  * Controller of the potatoApp
  */
 angular.module('potatoApp')
-  .controller('RegisterCtrl', function ($http, $scope, $sails) {
+  .controller('RegisterCtrl', function ($http, $scope, $sails, $location) {
 
   $scope.signupForm = {
     loading: false
@@ -30,7 +30,7 @@ angular.module('potatoApp')
           _csrf: data._csrf
         })
         .success(function (data, status, headers, jwr) {
-          window.location = '/';
+          $location.path( "/login" );
       })
         .error(function (data, status, headers, jwr) {
           $scope.signupForm.loading = true;

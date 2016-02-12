@@ -8,7 +8,7 @@
  * Controller of the potatoApp
  */
 angular.module('potatoApp')
-  .controller('MainCtrl', function ($scope, $http, ngCart, $sails, $window) {
+  .controller('MainCtrl', function ($scope, $http, $rootScope, ngCart, $sails, $window) {
     ngCart.setTaxRate(13.0);
     ngCart.setShipping(5.99);
 

@@ -24,13 +24,16 @@
 
     <!-- Add your site or application content here -->
     <div class="container-fluid">
-      <div>
+      <div ng-controller="AppCtrl">
         <a href="#" class="close-menu visible-xs"><i class="icon-close"></i></a>
         <ul class="nav-list text-center effect">
           <li class="active"><a href="#/">Shop</a></li>
           <li><a href="#/about">About</a></li>
-          <li><a href="#/register">Register</a></li>
-          <li><a href="#/login">Login</a></li>
+          <li ng-show="!$storage.user"><a href="#/register">Register</a></li>
+          <li ng-show="!$storage.user"><a href="#/login">Login</a></li>
+          <li ng-show="$storage.user"><a href="#/dashboard">Controll Panel</a></li>
+          <li ng-show="$storage.user.user.role == 'admin'"><a href="#/admin">Admin Controll Panel</a></li>
+          <li ng-show="$storage.user"><a href="#/logout">Logout</a></li>
         </ul>
       </div>
     </div>
@@ -111,6 +114,7 @@
     <script src="bower_components/ngcart/dist/ngCart.js"></script>
     <script src="bower_components/sails.io.js/dist/sails.io.js"></script>
     <script src="bower_components/angular-sails/dist/angular-sails.js"></script>
+    <script src="bower_components/ngstorage/ngStorage.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -122,6 +126,11 @@
         <script src="scripts/controllers/register.js"></script>
         <script src="scripts/controllers/cart.js"></script>
         <script src="scripts/directives/compareto.js"></script>
+        <script src="scripts/controllers/app.js"></script>
+        <script src="scripts/services/auth.js"></script>
+        <script src="scripts/services/session.js"></script>
+        <script src="scripts/controllers/logout.js"></script>
+        <script src="scripts/controllers/dashboard.js"></script>
         <!-- endbuild -->
 </body>
 </html>

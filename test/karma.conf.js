@@ -36,6 +36,7 @@ module.exports = function(config) {
       'bower_components/ngcart/dist/ngCart.js',
       'bower_components/sails.io.js/dist/sails.io.js',
       'bower_components/angular-sails/dist/angular-sails.js',
+      'bower_components/ngstorage/ngStorage.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",

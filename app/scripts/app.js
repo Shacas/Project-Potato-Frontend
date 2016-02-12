@@ -19,7 +19,8 @@ angular
     'ngSanitize',
     'ngTouch',
     'ngCart',
-    'ngSails'
+    'ngSails',
+    'ngStorage'
   ])
   .config(function ($routeProvider, $httpProvider, $sailsProvider) {
     $routeProvider
@@ -48,19 +49,19 @@ angular
         controller: 'CartCtrl',
         controllerAs: 'cart'
       })
-      .when('/dashboard',{
-        templateUrl: "views/home.html",
-        controller: "DashboardController",
+      .when('/logout', {
         resolve: {
-          auth: ["$q", "$window", function($q, $window) {
-            var userInfo = $window.sessionStorage["userInfo"];
-
-            if (userInfo) {
-              return $q.when(userInfo);
-            } else {
-              return $q.reject({ authenticated: false });
-            }
+          logout: ['Auth', function (Auth){
+              Auth.logout();
           }]
+        },
+      })
+      .when('/dashboard', {
+        templateUrl: 'views/dashboard.html',
+        controller: 'DashboardCtrl',
+        controllerAs: 'dashboard',
+        data:{
+          role: 'user'
         }
       })
       .otherwise({
@@ -77,3 +78,25 @@ angular
       $sailsProvider.url = 'http://localhost:1337';
 
   });
+
+  /**
+   * Frontend application run hook configuration. This will attach auth status
+   * check whenever application changes URL states.
+   */
+angular.module('potatoApp')
+    .run(function ($rootScope, Auth, $window) {
+        /**
+         * Route state change start event, this is needed for following:
+         *  1) Check if user is authenticated to access page, and if not redirect user back to login page
+         */
+        $rootScope.$on('$routeChangeStart', function (event, next) {
+          if (next.data) {
+            if (!Auth.isAuthorized(next.data.role)) {
+              event.preventDefault();
+              // A Message Service ?
+              window.location = '#/login';
+            }
+          }
+        });
+
+    });
