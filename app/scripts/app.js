@@ -64,6 +64,26 @@ angular
           role: 'user'
         }
       })
+      .when('/checkout', {
+        templateUrl: 'views/checkout.html',
+        controller: 'CheckoutCtrl',
+        controllerAs: 'checkout'
+      })
+      .when('/admin', {
+        templateUrl: 'views/admin.html',
+        controller: 'AdminCtrl',
+        controllerAs: 'admin'
+      })
+      .when('/admin/users', {
+        templateUrl: 'views/admin/users.html',
+        controller: 'AdminUsersCtrl',
+        controllerAs: 'admin/users'
+      })
+      .when('/admin/products', {
+        templateUrl: 'views/admin/products.html',
+        controller: 'AdminProductsCtrl',
+        controllerAs: 'admin/products'
+      })
       .otherwise({
         redirectTo: '/'
       });

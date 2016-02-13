@@ -3,6 +3,10 @@ html * {
 	/*-moz-osx-font-smoothing: grayscale;*/
 }
 
+.table.table-borderless td, .table.table-borderless th {
+    border: 0 !important;
+}
+
 html, body {
 	font-family: 'Source Sans Pro', sans-serif;
 	font-weight: 400;

@@ -2,22 +2,19 @@
 
 /**
  * @ngdoc function
- * @name potatoApp.controller:DashboardCtrl
+ * @name potatoApp.controller:AdminCtrl
  * @description
- * # DashboardCtrl
+ * # AdminCtrl
  * Controller of the potatoApp
  */
 angular.module('potatoApp')
-  .controller('DashboardCtrl', function ($scope, $http, $sessionStorage, ngCart, $sails, $window) {
+  .controller('AdminCtrl', function ($scope, $http, $sessionStorage, ngCart, $sails, $window) {
     $scope.orders = [];
     $scope.products = [];
-
-    var $userSession = $sessionStorage.user;
 
     $sails.get("/order")
         .success(function (data, status, headers, jwr) {
           data.forEach (function(order) {
-            if (order.user.id === $userSession.user.id){
               $scope.orders.push(order);
 
               var orderId = order.id
@@ -36,7 +33,7 @@ angular.module('potatoApp')
                   }
                 });
               });
-            }
+
           });
       })
         .error(function (data, status, headers, jwr) {
