@@ -1,1 +1,45 @@
-<p>This is the admin/users view.</p>
+<div class="container-fluid title">
+  <div class="row">
+    <div class="col-sm-12">
+      <h2>Admin Dashboard</h2>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid cart-list" ng-controller="CartCtrl">
+
+    <div class="col-xs-12 col-sm-2 blog-sidebar">
+      <div class="widget">
+        <h3>Admin Menu</h3>
+        <ul>
+          <li><a href="#/admin">Orders</a></li>
+          <li><a href="#/admin/users">Users</a></li>
+          <li><a href="#/admin/products">Products</a></li>
+        </ul>
+        <hr>
+      </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-10">
+      <table class="table text-center">
+        <thead>
+        <tr>
+            <th class="text-center">Username</th>
+            <th class="text-center">Name</th>
+            <th class="text-center">Email</th>
+            <th class="text-center">Phone</td>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="user in users">
+            <td>{{ user.username}}</td>
+            <td>{{ user.userInfo.name}}</td>
+            <td>{{ user.email }}</td>
+            <td> {{ user.userInfo.phone }}</td>
+            <td>Edit/Delete(Coming Soon)</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+</div>
